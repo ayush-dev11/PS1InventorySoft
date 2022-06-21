@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Item1</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1>Hello World</h1>
+    <form>
+        <div>
+            <label>Enter the name of the Item</label>
+            <input id="i1" type="text">
+        </div>
+        
+        <div>
+            <label>Enter parameter 1</label>
+            <input  id="p1" type="text">
+        </div>
+
+        <div>
+            <label>Enter parameter 2</label>
+            <input id="p2" type="text">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+<script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', submitForm);
+    function submitForm(e)
+    {
+        e.preventDefault();
+
+        const item1 = document.querySelector('#i1').value;
+        const parameter1 = document.querySelector('#p1').value;
+        const parameter2 = document.querySelector('#p2').value;
+
+        ipcRenderer.send('item:add',[item1,parameter1,parameter2]);
+
+    }
+</script>
+</html>
